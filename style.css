@@ -1,0 +1,153 @@
+:root {
+  --bg: #0b0b0b;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  background: var(--bg);
+  color: white;
+  font-family: 'Cinzel Decorative', serif;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== Оверлей с отсчётом ===== */
+#countdown-overlay {
+  position: fixed;
+  inset: 0;
+  background: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  transition: opacity 1s ease, visibility 1s ease;
+}
+
+#countdown-overlay.hide {
+  opacity: 0;
+  visibility: hidden;
+}
+
+#countdown {
+  font-size: clamp(3rem, 10vw, 8rem);
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 0 25px white, 0 0 50px white;
+  animation: scaleUp 1s ease infinite;
+}
+
+@keyframes scaleUp {
+  from { transform: scale(1); opacity: 1; }
+  to   { transform: scale(1.3); opacity: 0.6; }
+}
+
+/* ===== Контент ===== */
+.container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* дым */
+.smoke {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* анимация появления */
+.fade-in {
+  opacity: 0;
+  animation: fadeInUp 1.5s ease forwards;
+}
+.avatar.fade-in       { animation-delay: 0.3s; }
+.links.fade-in        { animation-delay: 0.9s; }
+.nickname.fade-in     { animation-delay: 1.7s; }
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* аватар */
+.avatar {
+  margin-bottom: 80px;
+  z-index: 3;
+}
+.avatar img {
+  width: clamp(120px, 20vw, 220px);
+  height: auto;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255,255,255,0.3);
+  box-shadow: 0 0 25px rgba(255,255,255,0.7);
+  cursor: pointer;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.avatar img:hover {
+  box-shadow: 0 0 40px rgba(255,255,255,1), 0 0 80px rgba(255,255,255,0.9);
+  transform: scale(1.05);
+}
+
+/* линки */
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  z-index: 3;
+  margin-bottom: 40px;
+}
+.links a {
+  color: white;
+  text-decoration: none;
+  font-size: clamp(1.3rem, 2.5vw, 2rem);
+  font-style: italic;
+  text-shadow: 0 0 12px rgba(255,255,255,0.8);
+  transition: text-shadow 0.3s ease, transform 0.3s ease;
+}
+.links a:hover {
+  text-shadow: 0 0 25px rgba(255,255,255,1), 0 0 50px rgba(255,255,255,0.9);
+  transform: scale(1.1);
+}
+
+/* ник внизу */
+.nickname {
+  position: absolute;
+  bottom: 25px;
+  left: 47%;
+  transform: translateX(-50%);
+  z-index: 3;
+  font-size: clamp(1rem, 2vw, 1.6rem);
+  font-style: italic;
+  opacity: 0;
+  animation: fadeInUp 1.5s ease forwards;
+  animation-delay: 1.7s;
+  text-shadow: 0 0 8px rgba(255,255,255,0.7);
+}
+
+/* адаптивность */
+@media (max-width: 600px) {
+  .avatar {
+    margin-bottom: 60px;
+  }
+  .links {
+    gap: 30px;
+    margin-bottom: 30px;
+  }
+  .nickname {
+    font-size: 1.2rem;
+  }
+}

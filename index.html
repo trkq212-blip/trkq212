@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>@trkq212</title>
+  <!-- Шрифт -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Оверлей с отсчётом -->
+  <div id="countdown-overlay">
+    <div id="countdown">3</div>
+  </div>
+
+  <div class="container">
+    <!-- Фон — дым -->
+    <video class="smoke" autoplay loop muted playsinline>
+      <source src="img/smoke.mp4" type="video/mp4" />
+    </video>
+
+    <!-- Аватар -->
+    <div class="avatar fade-in">
+      <img src="img/avatar.gif" alt="avatar" onclick="location.reload()" />
+    </div>
+
+    <!-- Линки -->
+    <nav class="links fade-in">
+      <a href="https://t.me/autostoop" target="_blank">telegram</a>
+      <a href="https://instagram.com/trkq212" target="_blank">instagram</a>
+      <a href="https://soundcloud.com/trkq212" target="_blank">soundcloud</a>
+    </nav>
+
+    <!-- Ник внизу -->
+    <div class="nickname fade-in">@trkq212</div>
+  </div>
+
+  <script>
+    let counter = 3; // начальное значение
+    const countdownEl = document.getElementById("countdown");
+    const overlay = document.getElementById("countdown-overlay");
+
+    const interval = setInterval(() => {
+      counter--;
+      if (counter > 0) {
+        countdownEl.textContent = counter;
+      } else {
+        clearInterval(interval);
+        overlay.classList.add("hide"); // скрываем оверлей
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
